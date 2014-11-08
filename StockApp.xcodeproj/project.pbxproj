@@ -14,6 +14,8 @@
 		49C1BB751A0E488B00573332 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C1BB731A0E488B00573332 /* LaunchScreen.xib */; };
 		49C1BB811A0E488B00573332 /* StockAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB801A0E488B00573332 /* StockAppTests.swift */; };
 		49C1BB8B1A0E4CE100573332 /* PositionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */; };
+		49F0DD4C1A0E8715009F6B0F /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */; };
+		49F0DD4E1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F0DD4D1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		49C1BB7F1A0E488B00573332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49C1BB801A0E488B00573332 /* StockAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockAppTests.swift; sourceTree = "<group>"; };
 		49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionsTableViewController.swift; sourceTree = "<group>"; };
+		49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		49F0DD4D1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewPositionCustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 			children = (
 				49C1BB671A0E488B00573332 /* AppDelegate.swift */,
 				49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */,
+				49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */,
+				49F0DD4D1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift */,
 				49C1BB6E1A0E488B00573332 /* Main.storyboard */,
 				49C1BB711A0E488B00573332 /* Images.xcassets */,
 				49C1BB731A0E488B00573332 /* LaunchScreen.xib */,
@@ -217,6 +223,8 @@
 			files = (
 				49C1BB8B1A0E4CE100573332 /* PositionsTableViewController.swift in Sources */,
 				49C1BB6B1A0E488B00573332 /* StockApp.xcdatamodeld in Sources */,
+				49F0DD4E1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift in Sources */,
+				49F0DD4C1A0E8715009F6B0F /* CustomTableViewCell.swift in Sources */,
 				49C1BB681A0E488B00573332 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +417,7 @@
 				49C1BB861A0E488B00573332 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49C1BB871A0E488B00573332 /* Build configuration list for PBXNativeTarget "StockAppTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +426,7 @@
 				49C1BB891A0E488B00573332 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
