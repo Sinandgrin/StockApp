@@ -52,43 +52,24 @@ class PositionsTableViewController: UITableViewController {
         myNumberFormatter.maximumFractionDigits = 2
         myNumberFormatter.minimumFractionDigits = 2
         
-        let cellIdentifier = (indexPath.row < stocks.count) ? "Cell" : "AddNewPositionCell"
-        let cell1 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
-        
         if (indexPath.row < stocks.count) {
-
-        cell1.symbolLabel.text = stocks[indexPath.row]
-        cell1.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(lastPrice[indexPath.row])!)"
-            println(cell1.symbolLabel.text)
-        return cell1
+            let cellIdentifier = "Cell"
+            let cell1 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
             
+            cell1.symbolLabel.text = stocks[indexPath.row]
+            cell1.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(lastPrice[indexPath.row])!)"
+            
+            return cell1
         } else {
-          let cell2 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as AddNewPositionCustomTableViewCell
-           
-            cell2.textLabel.text = "Tap to add symbol"
-                return cell2
+            let label = "Tap to add symbol"
+            let cellIdentifier = "AddNewPositionCell"
+            let cell2 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as AddNewPositionCustomTableViewCell
             
+            cell2.newPositionLabel.text = label
+            return cell2
         }
     }
     
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        
-//        // setup my number formatter to 2 decimal points
-//        let myNumberFormatter = NSNumberFormatter()
-//        myNumberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-//        myNumberFormatter.maximumFractionDigits = 2
-//        myNumberFormatter.minimumFractionDigits = 2
-//        
-//        let cellIdentifier = "Cell"
-//        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
-//        
-//            
-//            cell.symbolLabel.text = stocks[indexPath.row]
-//            cell.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(lastPrice[indexPath.row])!)"
-//            println(cell.symbolLabel.text)
-//            return cell
-//            
-//    }
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

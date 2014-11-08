@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>61D8F121-894C-4419-9FBE-36379EC58956</string>
+	<key>IDESourceControlProjectName</key>
+	<string>StockApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CA2F3719CD005D2CDFCEA8209D7ACA77B5018AEA</key>
+		<string>https://github.com/Sinandgrin/StockApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>StockApp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CA2F3719CD005D2CDFCEA8209D7ACA77B5018AEA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Sinandgrin/StockApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CA2F3719CD005D2CDFCEA8209D7ACA77B5018AEA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CA2F3719CD005D2CDFCEA8209D7ACA77B5018AEA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>StockApp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
