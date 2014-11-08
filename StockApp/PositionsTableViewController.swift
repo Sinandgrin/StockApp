@@ -54,19 +54,18 @@ class PositionsTableViewController: UITableViewController {
         
         if (indexPath.row < stocks.count) {
             let cellIdentifier = "Cell"
-            let cell1 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
             
-            cell1.symbolLabel.text = stocks[indexPath.row]
-            cell1.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(lastPrice[indexPath.row])!)"
+            cell.symbolLabel.text = stocks[indexPath.row]
+            cell.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(lastPrice[indexPath.row])!)"
             
-            return cell1
+            return cell
         } else {
-            let label = "Tap to add symbol"
             let cellIdentifier = "AddNewPositionCell"
-            let cell2 = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as AddNewPositionCustomTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as AddNewPositionCustomTableViewCell
             
-            cell2.newPositionLabel.text = label
-            return cell2
+            cell.newPositionLabel.text = "Tap to add symbol"
+            return cell
         }
     }
     
