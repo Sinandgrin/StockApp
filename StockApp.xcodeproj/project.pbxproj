@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49BC7F921A1418E80030AE43 /* StockDataAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */; };
 		49C1BB681A0E488B00573332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB671A0E488B00573332 /* AppDelegate.swift */; };
 		49C1BB6B1A0E488B00573332 /* StockApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB691A0E488B00573332 /* StockApp.xcdatamodeld */; };
 		49C1BB701A0E488B00573332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C1BB6E1A0E488B00573332 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDataAggregator.swift; sourceTree = "<group>"; };
 		49C1BB621A0E488B00573332 /* StockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C1BB661A0E488B00573332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49C1BB671A0E488B00573332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				49C1BB671A0E488B00573332 /* AppDelegate.swift */,
 				49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */,
 				49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */,
+				49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */,
 				49F0DD4D1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift */,
 				49C1BB6E1A0E488B00573332 /* Main.storyboard */,
 				49C1BB711A0E488B00573332 /* Images.xcassets */,
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C1BB8B1A0E4CE100573332 /* PositionsTableViewController.swift in Sources */,
+				49BC7F921A1418E80030AE43 /* StockDataAggregator.swift in Sources */,
 				49C1BB6B1A0E488B00573332 /* StockApp.xcdatamodeld in Sources */,
 				49F0DD4E1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift in Sources */,
 				49F0DD4C1A0E8715009F6B0F /* CustomTableViewCell.swift in Sources */,
