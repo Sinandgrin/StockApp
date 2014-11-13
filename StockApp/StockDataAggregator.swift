@@ -7,6 +7,7 @@
 //
 
 import Foundation
+let kNotificationPositionsUpdated = "positionsUpdated"
 
 class StockDataAggregator {
     
@@ -18,7 +19,7 @@ class StockDataAggregator {
         return Static.instance
     }
     
-    func updateListOfPositions(positions: [String] ) ->() {
+    func updateListOfPositions(positions: Array<(String,Double)>) ->() {
         
         // The YAHOO Finance API: Request for a list of symbols
         //http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol IN ("AAPL","GOOG","FB")&format=json&env=http://datatables.org/alltables.env
@@ -27,7 +28,7 @@ class StockDataAggregator {
         
         var stringQuotes = "("
         for symbol in positions {
-            stringQuotes = stringQuotes+"\""+symbol+"\","
+            stringQuotes = stringQuotes+"\""+symbol.0+"\","
         }
         stringQuotes = stringQuotes.substringToIndex(stringQuotes.endIndex.predecessor())
         stringQuotes = stringQuotes+")"
@@ -38,6 +39,29 @@ class StockDataAggregator {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         
+        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            
+            if (error != nil) {
+                println("URL Task error \(error.localizedDescription)")
+            } else {
+                var err: NSError?
+                
+                // Deserailize the JSON respoonse to a Dictionary, passing in "data" from the completionHandler of my URL task, setting the options to mutable containers, and using my NSError object called "err"
+                var jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+                if (err != nil) {
+                    println("JSON Error \(err?.localizedDescription)")
+                } else {
+                    // Parse down and retrieve the quote data from the JSON response
+                    var quotes: NSArray = ((jsonDict.objectForKey("query") as NSDictionary).objectForKey("results") as NSDictionary).objectForKey("quote") as NSArray
+                    dispatch_async(dispatch_get_main_queue(), {
+                        NSNotificationCenter.defaultCenter().postNotificationName(kNotificationPositionsUpdated, object: nil, userInfo: [kNotificationPositionsUpdated:quotes])
+                    })
+                }
+            }
+        })
+        
+        // call the resume method of the URL Task to begin
+        task.resume()
     }
     
 }
