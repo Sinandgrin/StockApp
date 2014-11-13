@@ -20,6 +20,13 @@ class PositionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Added manual pull-down to refresh control
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to update")
+        self.refreshControl?.backgroundColor = UIColor.whiteColor()
+        self.refreshControl?.tintColor = UIColor.blueColor()
+        self.refreshControl?.addTarget(self, action: "updatePositions", forControlEvents: UIControlEvents.ValueChanged)
+        
         // Adds an entry to the reciever's dispatch table to Register to listen for an NSNotification
         // Registers "self" aka PositionsTableViewCOntroller object as the observer
         // The Selector (function) that specifies the message the receiver sends notificationObserver to notify it of the notification posting.
@@ -70,6 +77,14 @@ class PositionsTableViewController: UITableViewController {
             return cell
         }
     }
+    // function to remove position from table
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            self.stocks.removeAtIndex(indexPath.row)
+            
+            self.tableView.reloadData()
+        }
+    }
     
     
     func updatePositions() {
@@ -77,12 +92,12 @@ class PositionsTableViewController: UITableViewController {
         positionManager.updateListOfPositions(stocks)
         
         
-        // Repeat this method every 15 seconds on a background thread
-        dispatch_after(
-            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
-            {
-            self.updatePositions()
-        })
+//        // Repeat this method every 15 seconds on a background thread
+//        dispatch_after(
+//            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
+//            {
+//            self.updatePositions()
+//        })
     }
     
     
@@ -97,7 +112,8 @@ class PositionsTableViewController: UITableViewController {
             stocks.append(quoteDict["symbol"] as String,changeInPercentClean.doubleValue)
         }
         tableView.reloadData()
-        println("Positions data updated")
+        self.refreshControl?.endRefreshing()
+        NSLog("Positions data updated")
     }
 
 }
