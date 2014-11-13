@@ -11,8 +11,9 @@ import UIKit
 class PositionsTableViewController: UITableViewController {
     
     
-    var stocks : [(String, Double)] = [("AAPL", 0), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
-    var lastPrice = [109.01, 45.42, 17.34, 42.06, 25.33, 118.80, 17.04, 66.01, 26.41, 70.62]
+    var stocks : [(String, Double)] = [("AAPL", 1.02), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
+   // var lastPrice = [109.01, 45.42, 17.34, 42.06, 25.33, 118.80, 17.04, 66.01, 26.41, 70.62]
+    
     
     
 
@@ -23,7 +24,7 @@ class PositionsTableViewController: UITableViewController {
         // Registers "self" aka PositionsTableViewCOntroller object as the observer
         // The Selector (function) that specifies the message the receiver sends notificationObserver to notify it of the notification posting.
         // Notification Name for which to register the observer. Only notifications with this name are delivered to the observer.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "positionsUpdated", name: kNotificationPositionsUpdated, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "positionsUpdated:", name: kNotificationPositionsUpdated, object: nil)
         self.updatePositions()
     }
 
@@ -75,20 +76,20 @@ class PositionsTableViewController: UITableViewController {
         let positionManager:StockDataAggregator = StockDataAggregator.sharedInstance
         positionManager.updateListOfPositions(stocks)
         
+        
         // Repeat this method every 15 seconds on a background thread
-//        dispatch_after(
-//            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
-//            {
-//            self.updatePositions()
-//        })
+        dispatch_after(
+            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
+            {
+            self.updatePositions()
+        })
     }
     
     
     func positionsUpdated(notification : NSNotification) {
         let values = (notification.userInfo as Dictionary<String,NSArray>)
-        let stocksRecieved: NSArray = values[kNotificationPositionsUpdated]!
+        let stocksRecieved: Array = values[kNotificationPositionsUpdated]!
         stocks.removeAll(keepCapacity: false)
-        lastPrice.removeAll(keepCapacity: false)
         for quote in stocksRecieved {
             let quoteDict: NSDictionary = quote as NSDictionary
             var changeInPercentString = quoteDict["ChangeinPercent"] as String
