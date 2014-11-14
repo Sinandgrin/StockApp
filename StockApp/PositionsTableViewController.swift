@@ -22,10 +22,13 @@ class PositionsTableViewController: UITableViewController {
         
         // Added manual pull-down to refresh control
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to update")
+        // commented out title since it was shown by default when app first loaded
+        
         self.refreshControl?.backgroundColor = UIColor.whiteColor()
         self.refreshControl?.tintColor = UIColor.blueColor()
         self.refreshControl?.addTarget(self, action: "updatePositions", forControlEvents: UIControlEvents.ValueChanged)
+        
+        
         
         // Adds an entry to the reciever's dispatch table to Register to listen for an NSNotification
         // Registers "self" aka PositionsTableViewCOntroller object as the observer
@@ -112,8 +115,18 @@ class PositionsTableViewController: UITableViewController {
             stocks.append(quoteDict["symbol"] as String,changeInPercentClean.doubleValue)
         }
         tableView.reloadData()
-        self.refreshControl?.endRefreshing()
         NSLog("Positions data updated")
+        
+        // End the refresh and add Last Updated title
+        let formatter = NSDateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("MM d, h:mm a")
+        let date = formatter.stringFromDate(NSDate())
+        let title: NSString = "Last update: \(date)"
+        let attributedTitle = NSAttributedString(string: title)
+        self.refreshControl?.attributedTitle = attributedTitle
+        
+        self.refreshControl?.endRefreshing()
     }
+    
 
 }

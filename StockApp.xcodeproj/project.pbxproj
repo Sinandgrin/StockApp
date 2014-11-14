@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		497C27CC1A158C3A009D3F2F /* PositionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497C27CB1A158C3A009D3F2F /* PositionClass.swift */; };
+		497C27CE1A158E2B009D3F2F /* NewPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497C27CD1A158E2B009D3F2F /* NewPositionViewController.swift */; };
 		49BC7F921A1418E80030AE43 /* StockDataAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */; };
 		49C1BB681A0E488B00573332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB671A0E488B00573332 /* AppDelegate.swift */; };
 		49C1BB6B1A0E488B00573332 /* StockApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49C1BB691A0E488B00573332 /* StockApp.xcdatamodeld */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		497C27CB1A158C3A009D3F2F /* PositionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionClass.swift; sourceTree = "<group>"; };
+		497C27CD1A158E2B009D3F2F /* NewPositionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPositionViewController.swift; sourceTree = "<group>"; };
 		49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDataAggregator.swift; sourceTree = "<group>"; };
 		49C1BB621A0E488B00573332 /* StockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C1BB661A0E488B00573332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,9 +90,11 @@
 			isa = PBXGroup;
 			children = (
 				49C1BB671A0E488B00573332 /* AppDelegate.swift */,
-				49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */,
-				49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */,
+				497C27CB1A158C3A009D3F2F /* PositionClass.swift */,
 				49BC7F911A1418E80030AE43 /* StockDataAggregator.swift */,
+				49C1BB8A1A0E4CE100573332 /* PositionsTableViewController.swift */,
+				497C27CD1A158E2B009D3F2F /* NewPositionViewController.swift */,
+				49F0DD4B1A0E8715009F6B0F /* CustomTableViewCell.swift */,
 				49F0DD4D1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift */,
 				49C1BB6E1A0E488B00573332 /* Main.storyboard */,
 				49C1BB711A0E488B00573332 /* Images.xcassets */,
@@ -224,12 +230,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497C27CE1A158E2B009D3F2F /* NewPositionViewController.swift in Sources */,
 				49C1BB8B1A0E4CE100573332 /* PositionsTableViewController.swift in Sources */,
 				49BC7F921A1418E80030AE43 /* StockDataAggregator.swift in Sources */,
 				49C1BB6B1A0E488B00573332 /* StockApp.xcdatamodeld in Sources */,
 				49F0DD4E1A0E96F2009F6B0F /* AddNewPositionCustomTableViewCell.swift in Sources */,
 				49F0DD4C1A0E8715009F6B0F /* CustomTableViewCell.swift in Sources */,
 				49C1BB681A0E488B00573332 /* AppDelegate.swift in Sources */,
+				497C27CC1A158C3A009D3F2F /* PositionClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,16 +18,16 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Edz-Ay-awM" id="JDI-wm-z9X">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jta-7e-rRC">
-                                            <rect key="frame" x="232" y="11" width="80" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Symbol" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wum-Oo-V55">
                                             <rect key="frame" x="60" y="11" width="59" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jta-7e-rRC">
+                                            <rect key="frame" x="215" y="11" width="72" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -69,12 +69,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBq-VX-X7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851" y="450"/>
+            <point key="canvasLocation" x="851" y="449"/>
         </scene>
-        <!--View Controller-->
+        <!--New Position View Controller-->
         <scene sceneID="p8w-RF-9F1">
             <objects>
-                <viewController id="as6-rI-xYL" sceneMemberID="viewController">
+                <viewController id="as6-rI-xYL" customClass="NewPositionViewController" customModule="StockApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Og9-cN-9q7"/>
                         <viewControllerLayoutGuide type="bottom" id="buG-lk-FaA"/>
@@ -86,14 +86,25 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter symbol" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fmb-vC-mMY">
                                 <rect key="frame" x="100" y="141" width="120" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="no" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="screenTapped:" destination="as6-rI-xYL" eventType="editingDidEnd" id="bcz-2q-TdW"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jRu-TB-BVb" appends="YES" id="DhT-fb-aWh"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="AX2-Fk-FdR"/>
+                    <connections>
+                        <outlet property="enterSymbolTextField" destination="Fmb-vC-mMY" id="3Ks-4m-pK2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MgD-I7-a9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jRu-TB-BVb"/>
             </objects>
             <point key="canvasLocation" x="1313" y="450"/>
         </scene>
