@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Positions Table View Controller-->
+        <!--Positions-->
         <scene sceneID="zfP-8B-Jmp">
             <objects>
                 <tableViewController id="2Jl-MW-4zP" customClass="PositionsTableViewController" customModule="StockApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,18 +19,13 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Edz-Ay-awM" id="JDI-wm-z9X">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Symbol" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wum-Oo-V55">
-                                            <rect key="frame" x="8" y="20" width="72" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jta-7e-rRC">
-                                            <rect key="frame" x="270" y="9" width="42" height="27"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Last" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jta-7e-rRC">
+                                            <rect key="frame" x="270" y="10" width="42" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$chg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDv-vx-mce">
-                                            <rect key="frame" x="236" y="35" width="32" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$chg" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDv-vx-mce">
+                                            <rect key="frame" x="236" y="36" width="32" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="zpT-nv-NCm"/>
                                             </constraints>
@@ -38,8 +33,8 @@
                                             <color key="textColor" red="0.019607843137254902" green="0.72549019607843135" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%chg" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFy-v9-6Ox">
-                                            <rect key="frame" x="273" y="35" width="39" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="%chg" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFy-v9-6Ox">
+                                            <rect key="frame" x="273" y="36" width="39" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="9qm-LV-Ngg"/>
                                             </constraints>
@@ -47,14 +42,27 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symbol" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wum-Oo-V55">
+                                            <rect key="frame" x="13" y="10" width="294" height="39"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="45"/>
+                                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="MDv-vx-mce" secondAttribute="bottom" constant="3" id="0Gm-WJ-0F7"/>
+                                        <constraint firstItem="wum-Oo-V55" firstAttribute="top" secondItem="JDI-wm-z9X" secondAttribute="topMargin" constant="2" id="1YV-7h-i1C"/>
+                                        <constraint firstAttribute="centerX" secondItem="wum-Oo-V55" secondAttribute="centerX" id="6HH-a7-UNK"/>
+                                        <constraint firstAttribute="centerY" secondItem="wum-Oo-V55" secondAttribute="centerY" id="8fd-my-QYT"/>
                                         <constraint firstAttribute="trailing" secondItem="jta-7e-rRC" secondAttribute="trailing" constant="8" id="Gue-A4-czb"/>
                                         <constraint firstItem="jta-7e-rRC" firstAttribute="top" secondItem="JDI-wm-z9X" secondAttribute="topMargin" constant="1" id="QhD-KV-Zux"/>
+                                        <constraint firstItem="wum-Oo-V55" firstAttribute="leading" secondItem="JDI-wm-z9X" secondAttribute="leadingMargin" constant="5" id="TgV-0T-ckQ"/>
                                         <constraint firstItem="sFy-v9-6Ox" firstAttribute="leading" secondItem="MDv-vx-mce" secondAttribute="trailing" constant="5" id="XBs-t3-ZmG"/>
                                         <constraint firstAttribute="trailing" secondItem="sFy-v9-6Ox" secondAttribute="trailing" constant="8" id="ZWg-2F-MTy"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="wum-Oo-V55" secondAttribute="bottom" constant="2" id="f2V-5W-s9D"/>
                                         <constraint firstAttribute="bottom" secondItem="sFy-v9-6Ox" secondAttribute="bottom" constant="3" id="h9M-Om-VY8"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wum-Oo-V55" secondAttribute="trailing" constant="5" id="k52-2H-vgn"/>
                                         <constraint firstItem="sFy-v9-6Ox" firstAttribute="trailing" secondItem="JDI-wm-z9X" secondAttribute="trailingMargin" id="w5t-1p-VLh"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -93,13 +101,13 @@
                             <outlet property="delegate" destination="2Jl-MW-4zP" id="oY6-S5-knu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="q9h-Lj-D8e"/>
+                    <navigationItem key="navigationItem" title="Positions" id="q9h-Lj-D8e"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oBq-VX-X7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851" y="445"/>
+            <point key="canvasLocation" x="851" y="442"/>
         </scene>
-        <!--New Position View Controller-->
+        <!--Add new symbol-->
         <scene sceneID="p8w-RF-9F1">
             <objects>
                 <viewController id="as6-rI-xYL" customClass="NewPositionViewController" customModule="StockApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -130,7 +138,7 @@
                             <outletCollection property="gestureRecognizers" destination="jRu-TB-BVb" appends="YES" id="DhT-fb-aWh"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="AX2-Fk-FdR"/>
+                    <navigationItem key="navigationItem" title="Add new symbol" id="AX2-Fk-FdR"/>
                     <connections>
                         <outlet property="enterSymbolTextField" destination="Fmb-vC-mMY" id="3Ks-4m-pK2"/>
                     </connections>
