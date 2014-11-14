@@ -8,7 +8,9 @@
 
 import UIKit
 
-class NewPositionViewController: UIViewController {
+class NewPositionViewController: UIViewController, UITextFieldDelegate {
+    
+    var addNewPostionDelegate: NewPostionDelegate?
 
     @IBOutlet weak var enterSymbolTextField: UITextField!
     
@@ -20,6 +22,7 @@ class NewPositionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        enterSymbolTextField.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -29,7 +32,12 @@ class NewPositionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        addNewPostionDelegate?.addNewPostion(enterSymbolTextField.text)
+        enterSymbolTextField.resignFirstResponder()
+        
+        return true
+    }
     
 
 }

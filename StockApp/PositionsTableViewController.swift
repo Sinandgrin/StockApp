@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PositionsTableViewController: UITableViewController {
+class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     
     
     var stocks : [(String, Double)] = [("AAPL", 1.02), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
@@ -20,14 +20,11 @@ class PositionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Added manual pull-down to refresh control
+        // Added manual pull-down to refresh control, which calles the updatePositions method
         self.refreshControl = UIRefreshControl()
-        // commented out title since it was shown by default when app first loaded
-        
         self.refreshControl?.backgroundColor = UIColor.whiteColor()
         self.refreshControl?.tintColor = UIColor.blueColor()
         self.refreshControl?.addTarget(self, action: "updatePositions", forControlEvents: UIControlEvents.ValueChanged)
-        
         
         
         // Adds an entry to the reciever's dispatch table to Register to listen for an NSNotification
@@ -126,6 +123,18 @@ class PositionsTableViewController: UITableViewController {
         self.refreshControl?.attributedTitle = attributedTitle
         
         self.refreshControl?.endRefreshing()
+    }
+    
+    
+    func addNewPostion(symbol: NSString) {
+        println(symbol)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // if this
+        if let newPostionViewControl = segue.destinationViewController as? NewPositionViewController {
+            newPostionViewControl.addNewPostionDelegate = self
+        }
     }
     
 
