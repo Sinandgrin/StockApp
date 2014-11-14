@@ -13,6 +13,8 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var symbolLabel: UILabel!
     @IBOutlet weak var lastPriceLabel: UILabel!
+    @IBOutlet weak var dollarDayChangeLabel: UILabel!
+    @IBOutlet weak var percentDayChangeLabel: UILabel!
     
 
     override func awakeFromNib() {

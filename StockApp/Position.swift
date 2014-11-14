@@ -12,12 +12,14 @@ class Position {
     
     var symbol : String = ""
     var lastPrice: Double = 0
-    var changeInPercent: Double = 0
+    var percentDayChange: Double = 0
+    var dollarDayChange: Double = 0
     
-    init (symbol:String, lastPrice:Double, changeInPercent:Double) {
+    init (symbol:String, lastPrice:Double, percentDayChange:Double, dollarDayChange:Double) {
         self.symbol=symbol
         self.lastPrice=lastPrice
-        self.changeInPercent=changeInPercent
+        self.percentDayChange=percentDayChange
+        self.dollarDayChange=dollarDayChange
     }
 }
     

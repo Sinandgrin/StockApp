@@ -11,10 +11,16 @@ import UIKit
 class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     
     
-    //var stocks : [(String, Double)] = [("AAPL", 1.02), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
-   // var lastPrice = [109.01, 45.42, 17.34, 42.06, 25.33, 118.80, 17.04, 66.01, 26.41, 70.62]
     
-    var positionsArray: [Position] = [Position(symbol:"BA", lastPrice:0.0, changeInPercent:0.0)]
+    var positionsArray: [Position] = [Position(symbol:"AAPL", lastPrice: 0.0, percentDayChange: 0.0, dollarDayChange: 0.0),
+        Position(symbol:"GOOG", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
+        Position(symbol:"MSFT", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
+        Position(symbol:"TSLA", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
+        Position(symbol:"GM", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
+        Position(symbol:"F", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
+        Position(symbol:"WMT", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0)]
+  
+    
     
     
 
@@ -67,7 +73,21 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
             
             cell.symbolLabel.text = positionsArray[indexPath.row].symbol
-            cell.lastPriceLabel.text = "\(myNumberFormatter.stringFromNumber(positionsArray[indexPath.row].changeInPercent)!)" + "%"
+            cell.lastPriceLabel.text = "$\(myNumberFormatter.stringFromNumber(positionsArray[indexPath.row].lastPrice)!)"
+            cell.percentDayChangeLabel.text = "(\(myNumberFormatter.stringFromNumber(positionsArray[indexPath.row].percentDayChange)!)" + "%)"
+            cell.dollarDayChangeLabel.text = "\(myNumberFormatter.stringFromNumber(positionsArray[indexPath.row].dollarDayChange)!)"
+            
+            switch positionsArray[indexPath.row].dollarDayChange {
+            case let x where x < 0.0:
+                cell.dollarDayChangeLabel.textColor = UIColor(red: 255.0/255.0, green: 59/255, blue: 48/255, alpha: 1)
+                cell.percentDayChangeLabel.textColor = UIColor(red: 255.0/255.0, green: 59/255, blue: 48/255, alpha: 1)
+            case let x where x > 0.0:
+                cell.dollarDayChangeLabel.textColor = UIColor(red: 5/255, green: 185/255, blue: 95/255, alpha: 1)
+                cell.percentDayChangeLabel.textColor = UIColor(red: 5/255, green: 185/255, blue: 95/255, alpha: 1)
+            case let x:
+                cell.dollarDayChangeLabel.textColor = UIColor(red: 44/255, green: 186/255, blue: 231/255, alpha: 1)
+                cell.percentDayChangeLabel.textColor = UIColor(red: 44/255, green: 186/255, blue: 231/255, alpha: 1)
+            }
             
             return cell
         } else {
@@ -77,7 +97,10 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
             cell.newPositionLabel.text = "Tap to add symbol"
             return cell
         }
+        
     }
+    
+    
     // function to remove position from table
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
@@ -89,16 +112,18 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     
     
     func updatePositions() {
-        let positionManager:StockDataAggregator = StockDataAggregator.sharedInstance
-        positionManager.updateListOfPositions(positionsArray)
-        
-        
-//        // Repeat this method every 15 seconds on a background thread
-//        dispatch_after(
-//            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
-//            {
-//            self.updatePositions()
-//        })
+        if positionsArray.count > 0 {
+            let positionManager:StockDataAggregator = StockDataAggregator.sharedInstance
+            positionManager.updateListOfPositions(positionsArray)
+            
+            
+            //        // Repeat this method every 15 seconds on a background thread
+            //        dispatch_after(
+            //            dispatch_time(DISPATCH_TIME_NOW, Int64(15 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(),
+            //            {
+            //            self.updatePositions()
+            //        })
+        }
     }
     
     
@@ -109,8 +134,11 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
         for quote in stocksRecieved {
             let quoteDict: NSDictionary = quote as NSDictionary
             var changeInPercentString = quoteDict["ChangeinPercent"] as String
-            let changeInPercentClean: NSString = (changeInPercentString as NSString).substringToIndex(countElements(changeInPercentString)-1)
-            positionsArray.append(Position(symbol: quoteDict["symbol"] as String, lastPrice: 0.0, changeInPercent: changeInPercentClean.doubleValue))
+            let changeInPercentCleaned: NSString = (changeInPercentString as NSString).substringToIndex(countElements(changeInPercentString)-1)
+            var lastPriceString = quoteDict["LastTradePriceOnly"] as String
+            let lastPriceStringNsed: NSString = (lastPriceString as NSString)
+            let dollarDayChangeNsed: NSString = (quoteDict["Change"] as NSString)
+            positionsArray.append(Position(symbol: quoteDict["symbol"] as String, lastPrice: lastPriceStringNsed.doubleValue, percentDayChange: changeInPercentCleaned.doubleValue, dollarDayChange: dollarDayChangeNsed.doubleValue))
         }
         tableView.reloadData()
         NSLog("Positions data updated")
@@ -128,7 +156,7 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     
     
     func addNewPosition(symbol: NSString) {
-        positionsArray.append(Position(symbol: symbol, lastPrice: 0.0, changeInPercent: 0.0))
+        positionsArray.append(Position(symbol: symbol, lastPrice: 0.0, percentDayChange: 0.0, dollarDayChange: 0.0))
         self.updatePositions()
         
     
