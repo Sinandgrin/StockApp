@@ -19,7 +19,7 @@ class StockDataAggregator {
         return Static.instance
     }
     
-    func updateListOfPositions(positions: Array<(String,Double)>) ->() {
+    func updateListOfPositions(positions: Array<Position>) ->() {
         
         // The YAHOO Finance API: Request for a list of symbols
         //http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol IN ("AAPL","GOOG","FB")&format=json&env=http://datatables.org/alltables.env
@@ -27,8 +27,8 @@ class StockDataAggregator {
         //Building the URL from above with the baked array of symbols
         
         var stringQuotes = "("
-        for symbol in positions {
-            stringQuotes = stringQuotes+"\""+symbol.0+"\","
+        for position in positions {
+            stringQuotes = stringQuotes+"\""+position.symbol+"\","
         }
         stringQuotes = stringQuotes.substringToIndex(stringQuotes.endIndex.predecessor())
         stringQuotes = stringQuotes+")"
@@ -52,10 +52,17 @@ class StockDataAggregator {
                     println("JSON Error \(err?.localizedDescription)")
                 } else {
                     // Parse down and retrieve the quote data from the JSON response
-                    var quotes: NSArray = ((jsonDict.objectForKey("query") as NSDictionary).objectForKey("results") as NSDictionary).objectForKey("quote") as NSArray
-                    dispatch_async(dispatch_get_main_queue(), {
-                        NSNotificationCenter.defaultCenter().postNotificationName(kNotificationPositionsUpdated, object: nil, userInfo: [kNotificationPositionsUpdated:quotes])
-                    })
+                    if let quotes: NSArray = ((jsonDict.objectForKey("query") as NSDictionary).objectForKey("results") as NSDictionary).objectForKey("quote") as? NSArray {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            NSNotificationCenter.defaultCenter().postNotificationName(kNotificationPositionsUpdated, object: nil, userInfo: [kNotificationPositionsUpdated:quotes])
+                        })
+
+                    } else if let quote: NSDictionary = ((jsonDict.objectForKey("query") as NSDictionary).objectForKey("results") as NSDictionary).objectForKey("quote") as? NSDictionary {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            NSNotificationCenter.defaultCenter().postNotificationName(kNotificationPositionsUpdated, object: nil, userInfo: [kNotificationPositionsUpdated:[quote]])
+                        })
+                    }
+                    
                 }
             }
         })

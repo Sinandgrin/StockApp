@@ -10,7 +10,7 @@ import UIKit
 
 class NewPositionViewController: UIViewController, UITextFieldDelegate {
     
-    var addNewPostionDelegate: NewPostionDelegate?
+    var addNewPositionDelegate: NewPositionDelegate?
 
     @IBOutlet weak var enterSymbolTextField: UITextField!
     
@@ -33,8 +33,8 @@ class NewPositionViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        addNewPostionDelegate?.addNewPostion(enterSymbolTextField.text)
-        enterSymbolTextField.resignFirstResponder()
+        addNewPositionDelegate?.addNewPosition(enterSymbolTextField.text)
+        self.navigationController?.popViewControllerAnimated(true)
         
         return true
     }

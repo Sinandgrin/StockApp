@@ -8,12 +8,16 @@
 
 import Foundation
 
-class PositionClass {
+class Position {
     
     var symbol : String = ""
     var lastPrice: Double = 0
     var changeInPercent: Double = 0
     
-    
+    init (symbol:String, lastPrice:Double, changeInPercent:Double) {
+        self.symbol=symbol
+        self.lastPrice=lastPrice
+        self.changeInPercent=changeInPercent
+    }
 }
     

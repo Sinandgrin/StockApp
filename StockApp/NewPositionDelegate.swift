@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol NewPostionDelegate {
+protocol NewPositionDelegate {
     
-    func addNewPostion (NSString)
+    func addNewPosition (NSString)
     
     
 }

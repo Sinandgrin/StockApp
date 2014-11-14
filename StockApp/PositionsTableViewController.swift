@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PositionsTableViewController: UITableViewController, NewPostionDelegate {
+class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     
     
-    var stocks : [(String, Double)] = [("AAPL", 1.02), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
+    //var stocks : [(String, Double)] = [("AAPL", 1.02), ("APU", 0), ("BAC", 0), ("BP", 0), ("CSCO", 0), ("CVX", 0), ("ESD", 0), ("ETP", 0), ("GE", 0), ("HCN", 0)]
    // var lastPrice = [109.01, 45.42, 17.34, 42.06, 25.33, 118.80, 17.04, 66.01, 26.41, 70.62]
     
+    var positionsArray: [Position] = [Position(symbol:"BA", lastPrice:0.0, changeInPercent:0.0)]
     
     
 
@@ -49,7 +50,7 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = stocks.count
+        let count = positionsArray.count
         return count + 1
     }
     
@@ -61,12 +62,12 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
         myNumberFormatter.maximumFractionDigits = 2
         myNumberFormatter.minimumFractionDigits = 2
         
-        if (indexPath.row < stocks.count) {
+        if (indexPath.row < positionsArray.count) {
             let cellIdentifier = "Cell"
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as CustomTableViewCell
             
-            cell.symbolLabel.text = stocks[indexPath.row].0
-            cell.lastPriceLabel.text = "\(myNumberFormatter.stringFromNumber(stocks[indexPath.row].1)!)" + "%"
+            cell.symbolLabel.text = positionsArray[indexPath.row].symbol
+            cell.lastPriceLabel.text = "\(myNumberFormatter.stringFromNumber(positionsArray[indexPath.row].changeInPercent)!)" + "%"
             
             return cell
         } else {
@@ -80,7 +81,7 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     // function to remove position from table
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            self.stocks.removeAtIndex(indexPath.row)
+            self.positionsArray.removeAtIndex(indexPath.row)
             
             self.tableView.reloadData()
         }
@@ -89,7 +90,7 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     
     func updatePositions() {
         let positionManager:StockDataAggregator = StockDataAggregator.sharedInstance
-        positionManager.updateListOfPositions(stocks)
+        positionManager.updateListOfPositions(positionsArray)
         
         
 //        // Repeat this method every 15 seconds on a background thread
@@ -104,12 +105,12 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     func positionsUpdated(notification : NSNotification) {
         let values = (notification.userInfo as Dictionary<String,NSArray>)
         let stocksRecieved: Array = values[kNotificationPositionsUpdated]!
-        stocks.removeAll(keepCapacity: false)
+        positionsArray.removeAll(keepCapacity: false)
         for quote in stocksRecieved {
             let quoteDict: NSDictionary = quote as NSDictionary
             var changeInPercentString = quoteDict["ChangeinPercent"] as String
             let changeInPercentClean: NSString = (changeInPercentString as NSString).substringToIndex(countElements(changeInPercentString)-1)
-            stocks.append(quoteDict["symbol"] as String,changeInPercentClean.doubleValue)
+            positionsArray.append(Position(symbol: quoteDict["symbol"] as String, lastPrice: 0.0, changeInPercent: changeInPercentClean.doubleValue))
         }
         tableView.reloadData()
         NSLog("Positions data updated")
@@ -126,14 +127,17 @@ class PositionsTableViewController: UITableViewController, NewPostionDelegate {
     }
     
     
-    func addNewPostion(symbol: NSString) {
-        println(symbol)
+    func addNewPosition(symbol: NSString) {
+        positionsArray.append(Position(symbol: symbol, lastPrice: 0.0, changeInPercent: 0.0))
+        self.updatePositions()
+        
+    
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // if this
-        if let newPostionViewControl = segue.destinationViewController as? NewPositionViewController {
-            newPostionViewControl.addNewPostionDelegate = self
+        if let newPositionViewControl = segue.destinationViewController as? NewPositionViewController {
+            newPositionViewControl.addNewPositionDelegate = self
         }
     }
     
