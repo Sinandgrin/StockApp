@@ -12,20 +12,44 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     
     
     
-    var positionsArray: [Position] = [Position(symbol:"AAPL", lastPrice: 0.0, percentDayChange: 0.0, dollarDayChange: 0.0),
-        Position(symbol:"GOOG", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
-        Position(symbol:"MSFT", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
-        Position(symbol:"TSLA", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
-        Position(symbol:"GM", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
-        Position(symbol:"F", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0),
-        Position(symbol:"WMT", lastPrice:0.0, percentDayChange:0.0, dollarDayChange:0.0)]
-  
+    var positionsArray:[Position] = []
+    let dataArchiveFileName = "data.archive"
+    
+    let testArray = ["apple", "tree", "frog"]
     
     
+//        Position(symbol:"AAPL"),
+//        Position(symbol:"GOOG"),
+//        Position(symbol:"MSFT"),
+//        Position(symbol:"TSLA"),
+//        Position(symbol:"GM"),
+//        Position(symbol:"F"),
+//        Position(symbol:"WMT")
     
+    
+    func getDataFilePath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory = paths[0] as String
+        return documentsDirectory.stringByAppendingPathComponent(dataArchiveFileName)
+    }
+    
+    
+    func load() {
+        let filePath = self.getDataFilePath()
+        if (NSFileManager.defaultManager().fileExistsAtPath(filePath)) {
+           positionsArray = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as [Position]
+        }
+    }
+    
+    
+    func save() {
+        let filePath = self.getDataFilePath()
+        let success = NSKeyedArchiver.archiveRootObject(positionsArray, toFile: filePath)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        load()
         
         // Added manual pull-down to refresh control, which calles the updatePositions method
         self.refreshControl = UIRefreshControl()
@@ -105,7 +129,7 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             self.positionsArray.removeAtIndex(indexPath.row)
-            
+            save()
             self.tableView.reloadData()
         }
     }
@@ -152,11 +176,13 @@ class PositionsTableViewController: UITableViewController, NewPositionDelegate {
         self.refreshControl?.attributedTitle = attributedTitle
         
         self.refreshControl?.endRefreshing()
+        save()
+    
     }
     
     
     func addNewPosition(symbol: NSString) {
-        positionsArray.append(Position(symbol: symbol, lastPrice: 0.0, percentDayChange: 0.0, dollarDayChange: 0.0))
+        positionsArray.append(Position(symbol: symbol))
         self.updatePositions()
         
     
